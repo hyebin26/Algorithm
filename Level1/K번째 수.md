@@ -14,7 +14,7 @@ function solution(array, commands) {
     return answer;
 }
 ```
-##다른사람풀이
+### 다른사람풀이
 ```jsx
 function solution(array, commands) {
     let answer = [];
