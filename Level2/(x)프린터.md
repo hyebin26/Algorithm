@@ -18,12 +18,17 @@
 - 인쇄 작업의 중요도는 1~9로 표현하며 숫자가 클수록 중요하다는 뜻입니다.
 - location은 0 이상 (현재 대기목록에 있는 작업 수 - 1) 이하의 값을 가지며 대기목록의 가장 앞에 있으면 0, 두 번째에 있으면 1로 표현합니다.
 
-### 풀이
+### 해설을 보고 본 풀이 
+1. 배열에서 첫 번째 행을 계속해서 봐야하므로 for문이 아닌 while문으로 반복문을 한다.
+2. shift로 가장 앞에 있는 수를 뽑고 배열에서 뽑은 수보다 큰 수가 있으면 push하고 없으면 cnt++를 한다.
+3. 배열이 변경되면 location의 수도 하나씩 앞으로 오기 떄문에 target의 수를 1씩 빼준다.
+4. 하지만 자신의 순서에도 출력을 하지 못하는 경우(target === -1)뒷 순서부터 돌아야 하므로 target의 길이를 다시 설정해준다.
+5. 2번 순서로 돌아가서 cnt++을 하고 location의 위치가 된 경우(target === 0) cnt를 출력해준다.
 ```jsx
 function solution(priorities, location) {
     let count = 0;
     let target = location;
-    
+   
     while(priorities.length > 0){
         let compareNum = priorities.shift();
         if(priorities.some(num => num > compareNum)){
