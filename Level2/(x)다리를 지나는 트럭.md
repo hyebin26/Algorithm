@@ -63,3 +63,24 @@ function solution(bridge_length, weight, truck_weights) {
     return second
 }
 ```
+
+## 오답풀이
+1. 내가 푼 풀이에서 틀린 부분인 다리에 존재하는 차가 통과하는 시간을 bridge_length + 현재의 시간(time)으로 정해주었다.
+2. 그리고 대기하고 있는 차가 들어오지 못하고 있을 경우는 시간을 가장 앞에 있는 차가 나가는 시간으로 점프해주었다.
+```jsx
+function solution(bridge_length, weight, truck_weights) {
+   let time = 0, qu=[[0,0]], weightOnBridge = 0;
+   while(qu.length > 0 || truck_weights.length >0){
+       if(qu[0][1] === time) weightOnBridge -= qu.shift()[0];
+       if(weightOnBridge + truck_weights[0] <= weight){
+           weightOnBridge += truck_weights[0];
+           qu.push([truck_weights.shift(),time + bridge_length]);
+       }
+       else{
+           if(qu[0]) time = qu[0][1] -1;
+       };
+       time++;
+   }
+    return time;
+}
+```
