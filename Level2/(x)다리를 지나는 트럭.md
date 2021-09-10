@@ -60,7 +60,6 @@ function solution(bridge_length, weight, truck_weights) {
             }
         }
     }
-    // 틀린 이유 => 다음 차가 첫 순서 바로 다음에 들어오는건 구현했지만 마지막 순서가 끝나고도 들어올 수 있음
     return second
 }
 ```
