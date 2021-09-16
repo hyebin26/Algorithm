@@ -49,3 +49,6 @@ function solution(numbers) {
     return answer[0] === '0' ? '0' : answer;
 }
 ```
+
+### 느낀점
+1. sort를 할 떄 a,b가 아닌 a+b도 이용할 수 있다.
