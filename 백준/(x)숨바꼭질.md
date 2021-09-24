@@ -63,3 +63,7 @@ sol(input);
 
 ### 느낀점
 - BFS 관련 문제가 이해가 되지 않아서 많은 문제를 접해보기 위해 백준에서 풀어보려고 했으나 nodejs로 문제를 풀었고 BFS가 이해가 아직 잘 되지 않아서 여러 문제를 접해서 익숙해져야 겠다.
+
+참고 : <a href="https://chanhuiseok.github.io/posts/baek-14/">https://chanhuiseok.github.io/posts/baek-14/</a>
+
+<a href="https://gywlsp.github.io/boj/1697/">https://gywlsp.github.io/boj/1697/</a>
