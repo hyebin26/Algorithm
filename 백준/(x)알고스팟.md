@@ -38,4 +38,52 @@
 0
 ```
 
-다시풀기
+### 풀이
+* 최소값을 구하는 것이므로 DFS보다 BFS가 적합하므로 BFS를 적용했다.
+1. dx,dy로 움직일 수 있는 거리를 설정한다.
+2. col,row로 미로의 크기를 넘어갈 경우를 제한하기 위해 변수를 선언해준다.
+3. 이미 지나온 곳을 체크하기 위한 checkRoom 변수를 선언한다.
+4. bfs를 구현하기 위한 queue라는 변수에 현재의 위치, 벽을 부순 횟수를 같이 넣어준다.
+5. while문에 bfs를 구현한다.
+```jsx
+const fs = require("fs");
+let input = fs
+  .readFileSync("./input.txt")
+  .toString()
+  .trim()
+  .split(/\s*,\s*|\s+/);
+
+const n = [input[0], input[1]];
+const room = input.slice(2, input.length + 1).map((v) => v.split(""));
+const solution = (n, room) => {
+  const dx = [1, 0, -1, 0];
+  const dy = [0, 1, 0, -1];
+  const [col, row] = n;
+  const checkRoom = room.map((item) => item.map((item2) => (item2 = 0)));
+  const queue = [[0, 0, 0]];
+  while (queue.length) {
+    const [cx, cy, cnt] = queue.shift();
+    if (cx === row - 1 && cy === col - 1) {
+      console.log(cnt);
+      break;
+    }
+    for (let i = 0; i <= dx.length - 1; i++) {
+      const mx = cx + dx[i];
+      const my = cy + dy[i];
+      if (mx >= 0 && my >= 0 && mx <= row - 1 && my <= col - 1) {
+        if (checkRoom[mx][my]) continue;
+        checkRoom[mx][my] = 1;
+        if (room[mx][my] === "1") {
+          room[mx][my] = 0;
+          queue.push([mx, my, cnt + 1]);
+        } else {
+          queue.unshift([mx, my, cnt]);
+        }
+      }
+    }
+  }
+};
+
+solution(n, room);
+
+```
