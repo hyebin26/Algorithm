@@ -59,3 +59,34 @@ function solution(N, road, K) {
 ```
 
 ### 풀이 
+1. 다익스트라 알고리즘 풀이이다.
+2. 우선 dist 배열을 선언하고 각 요소가 걸리는 시간을 계산하지 않았으므로 Infinity를 선언해준다.
+3. 노드에 도달했을 때 dist에 저장된 걸리는 시간이 현재 노드에 걸리는 시간보다 길다면 변경해준다.
+- ex) dist[2] = Infinity이고 현재 2라는 노드에 걸린 시간이 2일 경우 => dist[2] = 2로 변경해준다.
+4. dist.fillter로 K보다 같거나 작은 요소의 길이를 리턴한다.
+```jsx
+function solution(N, road, K) {
+    const dist = Array(N+1).fill(Infinity)
+    const adj = Array.from({length:N+1},()=>[]);
+    road.forEach(([a,b,c])=>{
+        adj[a].push({to:b,time:c});
+        adj[b].push({to:a,time:c});
+    }); 
+    const pq = [{to:1,time:0}];
+    dist[1] = 0;
+    while(pq.length){
+        let {to,time} = pq.pop();
+        adj[to].forEach(next =>{
+            if(dist[next.to] > dist[to] + next.time){
+                dist[next.to] = dist[to] + next.time;
+                pq.push(next);
+            }
+        })
+    }
+    return dist.filter((item)=> item <= K).length;
+}
+```
+
+### 느낀점 
+1. BFS로 구현해보려고 했지만 visit부분도 그렇고 전체적으로 체계가 안잡혀있어서 코드로 구현하지 못했다.
+2. 이해할 때 까지 코드를 계속작성해봤는데 이 방법이 제일 좋은 방법인 것 같다. 
