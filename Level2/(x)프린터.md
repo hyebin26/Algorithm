@@ -46,4 +46,30 @@ function solution(priorities, location) {
     return count;
 }
 ```
+
+### 다시 푼 풀이
+```jsx
+function solution(priorities, location) {
+    let result = 0;    
+    let check = [];
+    priorities.forEach((item,index) =>{
+        check.push([item,index])
+    })
+    while(check.length){
+      const front = check.shift();
+      if(check.find(ele => ele[0] > front[0])){
+          check.push(front);
+      }else{
+          result++;
+          if(front[1] === location){
+              break;
+          }
+      }
+    }
+    return result;
+};
+```
 참고: <a href="https://devuna.tistory.com/22">https://devuna.tistory.com/22</a>
+
+### 다시 풀고 느낀점
+1. 어떤방식으로 틀린지는 모르겠으나 쉽게 푼 것 같다. 최대한 문제 설명이랑 비슷하게 풀려고 한 것 같다.
