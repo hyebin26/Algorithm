@@ -88,3 +88,29 @@ function solution(bridge_length, weight, truck_weights) {
 ### 느낀점 
 1. 차가 도로를 통과하는 시간을 1초씩 증가하는 것이 아닌 도로에 들어올 떄 나가는 시간을 배열 안에 같이 넣었어야 했다. 구현되지 않을 때 다른 방법 체크하기
 2. 무조건 경과시간을 1초씩 증가시키는 것에 중점을 두지 않기.
+
+### 다시 풀기 
+```jsx
+function solution(bridge_length, weight, truck_weights) {
+    let time = 0;
+    let bridge = [[0,0]];  
+    while(bridge.length || truck_weights.length){
+        if(bridge[0][1] === time){
+            bridge.shift();
+        } 
+        const bridgeSum = bridge.reduce((pre,cur)=>[pre[0]+cur[0]],[0])[0];
+        if(bridgeSum + truck_weights[0] <= weight){
+            bridge.push([truck_weights.shift(),time + bridge_length])
+        }
+        else{
+            if(bridge[0]) time = bridge[0][1] - 1;
+        }
+        time++;
+    }
+    return time;
+}
+```
+
+### 틀린이유
+1. 우선 reduce를 사용해서 배열의 [0]번째있는 수의 합을 구하려고 했으나 return pre[0] + cur[0]로 리턴을 해서 타입 오류가 발생했다. 
+2. keyPoint는 bridge배열안에 이 트럭이 다리를 통과할 수 있는 시간과, 무게를 같이 푸시하는 것이다. => 이유는 트럭이 다리를 통과하는 시간을 같이 넣지 않으면 다리에 여러개의 트럭이 존재할 경우 일일히 나가는 시간을 계산할 수가 없음.
