@@ -52,3 +52,13 @@ function solution(numbers) {
 
 ### 느낀점
 1. sort를 할 떄 a,b가 아닌 a+b도 이용할 수 있다.
+
+### 다시 푼 풀이
+```jsx
+function solution(numbers) {
+    let answer = "";
+    numbers.map(item => String(item)).sort((a,b)=> (b+a)-(a+b))
+        .map(item => answer += String(item));
+    return answer[0] === "0" ? '0' : answer;
+}
+```
